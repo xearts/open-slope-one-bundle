@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Xearts\OpenSlopeOneBundle\Repository\OpenSlopeOneRatingRepository;
 
 /**
- * @ORM\Table(name="open_slope_one_ratings")
+ * @ORM\Table(name="open_slope_one_rating")
  * @ORM\Entity(repositoryClass=OpenSlopeOneRatingRepository::class)
  */
 class OpenSlopeOneRating
