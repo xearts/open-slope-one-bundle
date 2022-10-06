@@ -40,16 +40,16 @@ class OpenSlopeOneRepository extends ServiceEntityRepository
     public function getRecommendedItemsByItemId(int $itemId, int $limit = 20): array
     {
         $sql = 'select item_id2 from open_slope_one where item_id1 = ?'
-            . ' group by item_id2 order by sum(rating/times) limit ?';
-        return  $this->_em->getConnection()->fetchFirstColumn($sql, [$itemId, $limit]);
+            . ' group by item_id2 order by sum(rating/times) limit '.$limit;
+        return  $this->_em->getConnection()->fetchFirstColumn($sql, [$itemId]);
     }
 
     public function getRecommendedItemsByUserUserId(int $userId, int $limit = 20): array
     {
         $sql = 'select s.item_id2 from open_slope_one s,open_slope_one_rating u'
             . ' where u.user_id = ? and s.item_id1 = u.item_id and s.item_id2 != u.item_id'
-            . ' group by s.item_id2 order by sum(u.rating * s.times - s.rating)/sum(s.times) desc limit ?';
-        return  $this->_em->getConnection()->fetchFirstColumn($sql, [$userId, $limit]);
+            . ' group by s.item_id2 order by sum(u.rating * s.times - s.rating)/sum(s.times) desc limit '.$limit;
+        return  $this->_em->getConnection()->fetchFirstColumn($sql, [$userId]);
     }
 
     // /**

@@ -16,16 +16,16 @@ class OpenSlopeOne
     /**
      * @var int
      * @ORM\Id()
-     * @ORM\Column(type="integer", name="item1_id")
+     * @ORM\Column(type="integer", name="item_id1")
      */
-    private $item1Id;
+    private $itemId1;
 
     /**
      * @var int
      * @ORM\Id()
-     * @ORM\Column(type="integer", name="item2_id")
+     * @ORM\Column(type="integer", name="item_id2")
      */
-    private $item2Id;
+    private $itemId2;
 
     /**
      * @var int
@@ -42,17 +42,17 @@ class OpenSlopeOne
     /**
      * @return int
      */
-    public function getItem1Id(): int
+    public function getItemId1(): int
     {
-        return $this->item1Id;
+        return $this->itemId1;
     }
 
     /**
-     * @param int $item1Id
+     * @param int $itemId1
      */
-    public function setItem1Id(int $item1Id): self
+    public function setItemId1(int $itemId1): self
     {
-        $this->item1Id = $item1Id;
+        $this->itemId1 = $itemId1;
 
         return $this;
     }
@@ -60,17 +60,17 @@ class OpenSlopeOne
     /**
      * @return int
      */
-    public function getItem2Id(): int
+    public function getItemId2(): int
     {
-        return $this->item2Id;
+        return $this->itemId2;
     }
 
     /**
-     * @param int $item2Id
+     * @param int $itemId2
      */
-    public function setItem2Id(int $item2Id): self
+    public function setItemId2(int $itemId2): self
     {
-        $this->item2Id = $item2Id;
+        $this->itemId2 = $itemId2;
 
         return $this;
     }
