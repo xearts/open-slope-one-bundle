@@ -73,13 +73,13 @@ class Initializer
                 begin                    
                     DECLARE tmp_item_id int;
                     DECLARE done int default 0;                    
-                    DECLARE mycursor CURSOR FOR select distinct item_id from oso_user_ratings;
+                    DECLARE mycursor CURSOR FOR select distinct item_id from open_slope_one_rating;
                     DECLARE CONTINUE HANDLER FOR NOT FOUND set done=1;
                     open mycursor;
                     while (!done) do
                         fetch mycursor into tmp_item_id;
                         if (!done) then
-                            insert into oso_slope_one (select a.item_id as item_id1,b.item_id as item_id2,count(*) as times, sum(a.rating-b.rating) as rating from oso_user_ratings a,oso_user_ratings b where a.item_id = tmp_item_id and b.item_id != a.item_id and a.user_id=b.user_id group by a.item_id,b.item_id);
+                            insert into open_slope_one (select a.item_id as item_id1,b.item_id as item_id2,count(*) as times, sum(a.rating-b.rating) as rating from open_slope_one_rating a,open_slope_one_rating b where a.item_id = tmp_item_id and b.item_id != a.item_id and a.user_id=b.user_id group by a.item_id,b.item_id);
                         end if;
                     END while;
                     close mycursor;
