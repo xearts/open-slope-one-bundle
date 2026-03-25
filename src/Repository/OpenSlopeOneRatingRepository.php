@@ -43,38 +43,12 @@ class OpenSlopeOneRatingRepository extends ServiceEntityRepository
         $rating = $this->findOneBy(['itemId' => $itemId, 'userId' => $userId]);
         if (!$rating) {
             $rating = new OpenSlopeOneRating($itemId, $userId);
+            $rating->setRating("1.0000"); // 初期値
+        } else {
+            // 文字列として取得されるため、計算してセット
+            $currentRating = (float) $rating->getRating();
+            $rating->setRating((string)($currentRating + 1));
         }
-        $rating->setRating((string)((int)$rating->getRating() + 1));
         $this->add($rating, $flush);
     }
-
-
-    // /**
-    //  * @return OpenSlopeOneRating[] Returns an array of OrderItem objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?OpenSlopeOneRating
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

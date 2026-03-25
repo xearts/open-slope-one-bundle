@@ -9,14 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class Initializer
 {
-    private EntityManagerInterface $entityManager;
-
-    /**
-     * @param EntityManagerInterface $entityManager
-     */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     public function initialize(): void
@@ -36,16 +30,14 @@ class Initializer
     private function initializeByPhp(): void
     {
         $connection = $this->entityManager->getConnection();
-        $result = $connection->executeQuery('SELECT DISTINCT item_id FROM open_slope_one_rating');
-        $sql = "INSERT INTO open_slope_one "
-            . "("
-            . "SELECT a.item_id as item_id1, b.item_id as item_id2, count(*) as times, sum(a.rating - b.rating) as rating"
-            . " FROM open_slope_one_rating a,open_slope_one_rating b"
-            . " WHERE a.item_id = ? AND b.item_id != a.item_id AND a.user_id=b.user_id GROPU BY a.item_id,b.item_id"
-            . ")";
-        while ($itemId = $result->fetchOne()) {
-            $connection->executeQuery($sql, [$itemId]);
-        }
+        $sql = "INSERT INTO open_slope_one (item_id1, item_id2, times, rating)
+            SELECT a.item_id, b.item_id, COUNT(*), SUM(a.rating - b.rating)
+            FROM open_slope_one_rating a
+            INNER JOIN open_slope_one_rating b ON a.user_id = b.user_id
+            WHERE a.item_id != b.item_id
+            GROUP BY a.item_id, b.item_id";
+
+        $connection->executeQuery($sql);
     }
 
 

@@ -7,104 +7,66 @@ namespace Xearts\OpenSlopeOneBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Xearts\OpenSlopeOneBundle\Repository\OpenSlopeOneRepository;
 
-/**
- * @ORM\Table(name="open_slope_one")
- * @ORM\Entity(repositoryClass=OpenSlopeOneRepository::class)
- */
+#[ORM\Table(name: 'open_slope_one')]
+#[ORM\Entity(repositoryClass: OpenSlopeOneRepository::class)]
 class OpenSlopeOne
 {
-    /**
-     * @var int
-     * @ORM\Id()
-     * @ORM\Column(type="integer", name="item_id1")
-     */
-    private $itemId1;
+    #[ORM\Id]
+    #[ORM\Column(name: 'item_id1', type: 'integer')]
+    private ?int $itemId1 = null;
 
-    /**
-     * @var int
-     * @ORM\Id()
-     * @ORM\Column(type="integer", name="item_id2")
-     */
-    private $itemId2;
+    #[ORM\Id]
+    #[ORM\Column(name: 'item_id2', type: 'integer')]
+    private ?int $itemId2 = null;
 
-    /**
-     * @var int
-     * @ORM\Column(type="integer", name="times")
-     */
-    private $times;
+    #[ORM\Column(name: 'times', type: 'integer')]
+    private ?int $times = null;
 
-    /**
-     * @var string
-     * @ORM\Column(type="decimal", name="rating", precision=18, scale=4)
-     */
-    private $rating;
+    #[ORM\Column(name: 'rating', type: 'decimal', precision: 18, scale: 4)]
+    private ?string $rating = null;
 
-    /**
-     * @return int
-     */
-    public function getItemId1(): int
+    public final function getItemId1(): ?int
     {
         return $this->itemId1;
     }
 
-    /**
-     * @param int $itemId1
-     */
-    public function setItemId1(int $itemId1): self
+    public final function setItemId1(int $itemId1): self
     {
         $this->itemId1 = $itemId1;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getItemId2(): int
+    public final function getItemId2(): ?int
     {
         return $this->itemId2;
     }
 
-    /**
-     * @param int $itemId2
-     */
-    public function setItemId2(int $itemId2): self
+    public final function setItemId2(int $itemId2): self
     {
         $this->itemId2 = $itemId2;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getTimes(): int
+    public final function getTimes(): ?int
     {
         return $this->times;
     }
 
-    /**
-     * @param int $times
-     */
-    public function setTimes(int $times): self
+    public final function setTimes(int $times): self
     {
         $this->times = $times;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getRating(): string
+    public final function getRating(): ?string
     {
         return $this->rating;
     }
 
-    /**
-     * @param string $rating
-     */
-    public function setRating(string $rating): self
+    public final function setRating(string $rating): self
     {
         $this->rating = $rating;
 
